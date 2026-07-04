@@ -1,0 +1,37 @@
+name: Vite build check
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Vite build & hydration bundle check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Clear Vite optimized-deps cache
+        run: rm -rf node_modules/.vite
+
+      - name: Vite build (production)
+        run: bun run build 2>&1 | tee build.log
+
+      - name: Fail if @tanstack/start-client-core hydration errors
+        run: |
+          if grep -E "(start-client-core.*hydrateStart|Failed to resolve.*start-client-core|tanstack-start-plugin-adapters)" build.log; then
+            echo "::error::Detected @tanstack/start-client-core hydration/bundle error"
+            exit 1
+          fi
