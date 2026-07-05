@@ -587,15 +587,114 @@ export function NotesApp() {
             )}
             {preview ? (
               <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 prose prose-sm dark:prose-invert max-w-none">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {activeNote.body || "*Nothing to preview*"}
-                </ReactMarkdown>
+                {(() => {
+                  let checkboxIndex = -1;
+                  return (
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        input: ({ node: _node, ...props }) => {
+                          if (props.type === "checkbox") {
+                            checkboxIndex += 1;
+                            const myIndex = checkboxIndex;
+                            return (
+                              <input
+                                {...props}
+                                disabled={false}
+                                onChange={() => {
+                                  const src = activeNote.body;
+                                  const re = /\[[ xX]\]/g;
+                                  let match: RegExpExecArray | null;
+                                  let i = 0;
+                                  while ((match = re.exec(src)) !== null) {
+                                    if (i === myIndex) {
+                                      const seg = match[0];
+                                      const replaced = seg === "[ ]" ? "[x]" : "[ ]";
+                                      updateNote({
+                                        body:
+                                          src.slice(0, match.index) +
+                                          replaced +
+                                          src.slice(match.index + 3),
+                                      });
+                                      return;
+                                    }
+                                    i += 1;
+                                  }
+                                }}
+                              />
+                            );
+                          }
+                          return <input {...props} />;
+                        },
+                      }}
+                    >
+                      {activeNote.body || "*Nothing to preview*"}
+                    </ReactMarkdown>
+                  );
+                })()}
               </div>
+
             ) : (
               <Textarea
                 ref={editorRef}
                 value={activeNote.body}
                 onChange={(e) => updateNote({ body: e.target.value })}
+                onKeyDown={(e) => {
+                  const ta = e.currentTarget;
+                  if (ta.selectionStart !== ta.selectionEnd) return;
+                  const value = ta.value;
+                  const pos = ta.selectionStart;
+                  const lineStart = value.lastIndexOf("\n", pos - 1) + 1;
+                  const lineEndIdx = value.indexOf("\n", pos);
+                  const lineEnd = lineEndIdx === -1 ? value.length : lineEndIdx;
+                  const currentLine = value.slice(lineStart, lineEnd);
+                  const beforeCaret = value.slice(lineStart, pos);
+                  const afterCaret = value.slice(pos, lineEnd);
+                  const listRe =
+                    /^(\s*)(?:([-*+])|(\d+)\.)(\s\[[ xX]\])?(\s)(.*)$/;
+                  const m = currentLine.match(listRe);
+
+                  if (e.key === "Enter" && !e.shiftKey && m) {
+                    const [, indent, bullet, num, checkbox, space, content] = m;
+                    e.preventDefault();
+                    if (content.trim() === "") {
+                      const newValue =
+                        value.slice(0, lineStart) + value.slice(lineEnd);
+                      updateNote({ body: newValue });
+                      requestAnimationFrame(() => {
+                        ta.selectionStart = ta.selectionEnd = lineStart;
+                      });
+                      return;
+                    }
+                    const marker = bullet
+                      ? bullet
+                      : `${parseInt(num, 10) + 1}.`;
+                    const newCheckbox = checkbox ? " [ ]" : "";
+                    const insert = `\n${indent}${marker}${newCheckbox}${space}`;
+                    const newValue =
+                      value.slice(0, pos) + insert + value.slice(pos);
+                    updateNote({ body: newValue });
+                    const newPos = pos + insert.length;
+                    requestAnimationFrame(() => {
+                      ta.selectionStart = ta.selectionEnd = newPos;
+                    });
+                    return;
+                  }
+
+                  if (e.key === "Backspace") {
+                    const emptyMarkerRe =
+                      /^(\s*)(?:[-*+]|\d+\.)(\s\[[ xX]\])?\s$/;
+                    if (emptyMarkerRe.test(beforeCaret) && afterCaret === "") {
+                      e.preventDefault();
+                      const newValue =
+                        value.slice(0, lineStart) + value.slice(pos);
+                      updateNote({ body: newValue });
+                      requestAnimationFrame(() => {
+                        ta.selectionStart = ta.selectionEnd = lineStart;
+                      });
+                    }
+                  }
+                }}
                 placeholder="Write markdown here..."
                 className="flex-1 resize-none border-0 shadow-none focus-visible:ring-0 rounded-none px-4 sm:px-6 py-4 font-mono text-sm"
               />

@@ -66,4 +66,3 @@ Two tables, both with Row Level Security enabled:
 - **`notes`** — `id uuid`, `user_id uuid`, `notebook_id uuid` (nullable FK to `notebooks`), `title text`, `body text`, `created_at timestamptz`, `updated_at timestamptz`
 
 Full SQL is in [`supabase/migrations/`](./supabase/migrations/).
-https://duckduckgo.com/email/

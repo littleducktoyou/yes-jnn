@@ -62,7 +62,7 @@ export function applyAction(
 
   const linePrefix = (prefix: string | ((i: number) => string)) => {
     const startLine = before.lastIndexOf("\n") + 1;
-    const block = value.slice(startLine, e) || "line";
+    const block = value.slice(startLine, e);
     const lines = block.split("\n");
     const updated = lines
       .map((l, i) => (typeof prefix === "string" ? prefix : prefix(i)) + l)

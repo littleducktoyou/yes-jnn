@@ -80,15 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "yes jnn" },
-      { name: "description", content: "web" },
+      { name: "description", content: "yes jnn is an open-source markdown notes web app modeled after Joplin." },
       { name: "author", content: "Lovable" },
       { property: "og:title", content: "yes jnn" },
-      { property: "og:description", content: "web" },
+      { property: "og:description", content: "yes jnn is an open-source markdown notes web app modeled after Joplin." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "yes jnn" },
-      { name: "twitter:description", content: "web" },
+      { name: "twitter:description", content: "yes jnn is an open-source markdown notes web app modeled after Joplin." },
       {
         property: "og:image",
         content:
@@ -99,8 +99,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/04838423-7c91-4229-ab62-a040cd794347",
       },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8f3681ee-2416-47c8-9527-918dc516f449/id-preview-c88db84a--0f03efb5-8637-40ce-9c08-5b7dcbc7cb90.lovable.app-1783098620536.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8f3681ee-2416-47c8-9527-918dc516f449/id-preview-c88db84a--0f03efb5-8637-40ce-9c08-5b7dcbc7cb90.lovable.app-1783098620536.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5615cd72-3988-4087-9512-912778879af7" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5615cd72-3988-4087-9512-912778879af7" },
     ],
     links: [
       {

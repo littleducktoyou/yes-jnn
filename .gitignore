@@ -1,5 +1,5 @@
 # Environment variables — NEVER commit these
-
+.env
 .env.local
 .env.*.local
 .env.development
@@ -7,6 +7,9 @@
 
 # Supabase local CLI output (if using supabase CLI locally)
 .supabase/
+
+# Supabase
+supabase/config.toml
 
 # Logs
 logs
@@ -18,6 +21,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.lovable
 dist
 dist-ssr
 .output
