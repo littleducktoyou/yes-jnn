@@ -10,6 +10,23 @@ import { Eye, EyeOff, NotebookPen } from "lucide-react";
 
 export const Route = createFileRoute("/reset-password")({
   ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Reset Password — yes jnn" },
+      {
+        name: "description",
+        content:
+          "Set a new password for your yes jnn account to regain access to your markdown notes and notebooks.",
+      },
+      { property: "og:title", content: "Reset Password — yes jnn" },
+      {
+        property: "og:description",
+        content:
+          "Set a new password for your yes jnn account to regain access to your markdown notes and notebooks.",
+      },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: ResetPassword,
 });
 
