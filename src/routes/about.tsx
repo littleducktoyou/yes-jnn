@@ -8,9 +8,17 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — yes jnn" },
-      { name: "description", content: "About yes jnn — an open-source notes app." },
+      {
+        name: "description",
+        content:
+          "About yes jnn — an open-source markdown notes web app inspired by Joplin, built with TanStack Start and released under AGPL-3.0.",
+      },
       { property: "og:title", content: "About — yes jnn" },
-      { property: "og:description", content: "About yes jnn — an open-source notes app." },
+      {
+        property: "og:description",
+        content:
+          "About yes jnn — an open-source markdown notes web app inspired by Joplin, built with TanStack Start and released under AGPL-3.0.",
+      },
     ],
   }),
   component: AboutPage,
@@ -28,7 +36,7 @@ function AboutPage() {
         </Link>
 
         <h1 className="text-3xl font-bold tracking-tight mb-2">About</h1>
-        <p className="text-muted-foreground mb-10">yes jnn is a vide shitted open-source notes app.</p>
+        <p className="text-muted-foreground mb-10">yes jnn is a vibe shitted open-source notes app.</p>
 
         <section className="mb-10">
           <h2 className="text-xl font-semibold mb-3">Links</h2>

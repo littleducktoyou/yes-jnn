@@ -8,9 +8,6 @@
 # Supabase local CLI output (if using supabase CLI locally)
 .supabase/
 
-# Supabase
-supabase/config.toml
-
 # Logs
 logs
 *.log

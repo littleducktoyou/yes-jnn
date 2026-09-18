@@ -285,6 +285,7 @@ export function NotesApp() {
           onClick={() => setSidebarCollapsed(true)}
           className="ml-auto hidden md:inline-flex text-sidebar-foreground/70 hover:text-sidebar-foreground p-1"
           title="Collapse sidebar"
+          aria-label="Collapse sidebar"
         >
           <PanelLeftClose className="size-4" />
         </button>
@@ -295,6 +296,7 @@ export function NotesApp() {
           onClick={newNotebook}
           className="text-muted-foreground hover:text-foreground p-1"
           title="New notebook"
+          aria-label="New notebook"
         >
           <Plus className="size-4" />
         </button>
@@ -421,7 +423,7 @@ export function NotesApp() {
           <div className="flex items-center gap-1 min-w-0">
             <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
               <SheetTrigger asChild>
-                <Button size="icon" variant="ghost" className="md:hidden shrink-0 h-9 w-9">
+                <Button size="icon" variant="ghost" className="md:hidden shrink-0 h-9 w-9" aria-label="Open notebooks menu">
                   <Menu className="size-5" />
                 </Button>
               </SheetTrigger>
@@ -443,6 +445,7 @@ export function NotesApp() {
               variant="ghost"
               className="hidden md:inline-flex shrink-0 h-9 w-9"
               title="Collapse notes list"
+              aria-label="Collapse notes list"
               onClick={() => setNotesListCollapsed(true)}
             >
               <PanelRightClose className="size-4" />
@@ -476,6 +479,7 @@ export function NotesApp() {
 
       {/* Editor — full screen on mobile when active */}
       <main className={`${activeNoteId ? "flex" : "hidden md:flex"} flex-1 flex-col min-w-0`}>
+        <h1 className="sr-only">yes jnn — Your Markdown Notes</h1>
         {activeNote ? (
           <>
             <div className="px-3 sm:px-6 py-2 sm:py-3 border-b border-border flex items-center gap-2">
@@ -494,6 +498,7 @@ export function NotesApp() {
                   variant="ghost"
                   className="hidden md:inline-flex shrink-0 h-9 w-9"
                   title="Show notebooks"
+                  aria-label="Show notebooks"
                   onClick={() => setSidebarCollapsed(false)}
                 >
                   <PanelLeftOpen className="size-4" />
@@ -505,6 +510,7 @@ export function NotesApp() {
                   variant="ghost"
                   className="hidden md:inline-flex shrink-0 h-9 w-9"
                   title="Show notes list"
+                  aria-label="Show notes list"
                   onClick={() => setNotesListCollapsed(false)}
                 >
                   <PanelRightOpen className="size-4" />
@@ -521,6 +527,7 @@ export function NotesApp() {
                 variant="ghost"
                 className="shrink-0 h-9 w-9"
                 title={preview ? "Edit" : "Preview markdown"}
+                aria-label={preview ? "Switch to edit mode" : "Preview markdown"}
                 onClick={() => setPreview((p) => !p)}
               >
                 <MarkdownLogo className={cn("size-4", preview ? "invert brightness-50" : "")} />
@@ -531,6 +538,7 @@ export function NotesApp() {
                   variant="ghost"
                   className="shrink-0 h-9 w-9"
                   title={toolbarHidden ? "Show toolbar" : "Hide toolbar"}
+                  aria-label={toolbarHidden ? "Show toolbar" : "Hide toolbar"}
                   onClick={() => setToolbarHidden((v) => !v)}
                 >
                   {toolbarHidden ? (
@@ -546,6 +554,7 @@ export function NotesApp() {
                   variant="ghost"
                   onClick={() => restoreNote(activeNote.id)}
                   title="Restore note"
+                  aria-label="Restore note"
                   className="shrink-0 h-9 w-9"
                 >
                   <RotateCcw className="size-4" />
@@ -558,6 +567,7 @@ export function NotesApp() {
                   viewingTrash ? permanentlyDeleteNote(activeNote.id) : trashNote(activeNote.id)
                 }
                 title={viewingTrash ? "Delete permanently" : "Move to trash"}
+                aria-label={viewingTrash ? "Delete note permanently" : "Move note to trash"}
                 className="shrink-0 h-9 w-9"
               >
                 <Trash2 className="size-4" />
@@ -788,6 +798,7 @@ function SidebarItem({
             e.stopPropagation();
             onDelete();
           }}
+          aria-label={`Delete notebook ${label}`}
           className="md:opacity-0 md:group-hover:opacity-100 text-muted-foreground hover:text-destructive p-1"
         >
           <Trash2 className="size-3.5" />

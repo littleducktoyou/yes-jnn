@@ -79,16 +79,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "yes jnn" },
-      { name: "description", content: "yes jnn is an open-source markdown notes web app modeled after Joplin." },
+      { title: "yes jnn — Open-source Markdown Notes" },
+      { name: "description", content: "yes jnn is an open-source markdown notes web app inspired by Joplin — write, organize, and preview notes in your browser." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "yes jnn" },
-      { property: "og:description", content: "yes jnn is an open-source markdown notes web app modeled after Joplin." },
+      { property: "og:title", content: "yes jnn — Open-source Markdown Notes" },
+      { property: "og:description", content: "yes jnn is an open-source markdown notes web app inspired by Joplin — write, organize, and preview notes in your browser." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "yes jnn" },
-      { name: "twitter:description", content: "yes jnn is an open-source markdown notes web app modeled after Joplin." },
+      { name: "twitter:title", content: "yes jnn — Open-source Markdown Notes" },
+      { name: "twitter:description", content: "yes jnn is an open-source markdown notes web app inspired by Joplin — write, organize, and preview notes in your browser." },
       {
         property: "og:image",
         content:
@@ -99,8 +99,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/04838423-7c91-4229-ab62-a040cd794347",
       },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5615cd72-3988-4087-9512-912778879af7" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/5615cd72-3988-4087-9512-912778879af7" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/bc784459-2adf-4ab3-a4cb-538749ef6a6d" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/bc784459-2adf-4ab3-a4cb-538749ef6a6d" },
     ],
     links: [
       {
